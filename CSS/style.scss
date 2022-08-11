@@ -1,0 +1,391 @@
+@import "nesting_sass";
+@mixin sameinall {
+  font-style: italic;
+  stroke: beige;
+}
+
+
+// /////////////////////////SASS Variable ////////////////////
+/* Define sass variables and values for website */
+$bgcolor:yellow;
+$textcolor: darkblue;
+$fontsize: 18px;
+
+/* Use the variables */
+body {
+  @include sameinall;
+  background-color: $bgcolor;
+  color: $textcolor;
+  font-size: $fontsize;
+}
+
+// /////////////////////////////Nesting SASS ///////////////////////
+
+// nav {
+//   ul {
+//     margin: 0;
+//     padding: 0;
+//     list-style: none;
+//   }
+//   li {
+//     display: inline-block;
+//   }
+//   a {
+//     display: block;
+//     padding: 6px 12px;
+//     text-decoration: none;
+//   }
+// }
+
+// //////////////////////////////////SASS MIXINS/////////////////////
+@mixin bordered($color, $width , $value) {
+  border: $width solid $color;
+  border-radius: $value
+}
+.alldiv{
+  @include bordered(blue, 10px , 20px);
+  width: 80px;
+  height: 50px; 
+}
+
+// /////////////////////////////SASS EXTENDS ////////////////////////@include
+
+#first{
+color: red;
+text-transform: uppercase;
+text-indent: 50px;
+@extend #second;
+}
+#second{
+color: green;
+text-decoration-line: overline;
+text-shadow: 2px 2px;
+@extend #first;
+}
+
+
+// /////////////////////////////////SASS Operators/////////////////
+
+
+$var1:10;
+$var2:20;
+
+.opt{
+  padding: 10px == 10px; 
+  padding: 10px == 10px and 'arial' == 'arial';
+  padding: $var1 + $var2 + px;
+  // style.css file gives response 
+  .opt {
+    padding: true;
+    padding: true;
+    padding: 30px; }
+}
+
+
+//////////////////////SASS INTERPOLATION /////////////////////////
+
+@mixin Interpolation($position,$value) {
+  margin-#{$position}:$value+px;
+}
+.opt{
+  @include Interpolation(right,20);
+  // style.css file gives response 
+  .opt {
+    margin-right: 20px; }
+}
+
+// //////////////SASS FUNCTION///////////////////////////
+$div-width:1200;
+@function set-width($width)
+{
+  @return $width/2+px;
+}
+
+.divstyle{
+  width: set-width($div-width);
+  border: 5px solid red;
+}
+ // style.css file gives response 
+.divstyle {
+  width: 600px; }
+
+
+  // //////////////////// SASS LOOPS @for , @each , @while Loop/////////////////////
+
+  // /////////////////////////////////@for loop////////////////
+
+@for $i from 1 through 3{
+  #loops-#{$i}{
+    width: 100px;
+    background-color: darken($color: pink, $amount: $i)
+  }
+}
+
+// //////////////////////////////@each loop////////////////////
+$lists:((normal,bold,10px),(italic,extend,5px));
+@each $name,$style,$value in $lists
+{
+  #{$name}{
+    font-weight: $style;
+    font-size: $value;
+  }
+}
+
+// //////////////////////////////while loop////////////////////
+$i:10;
+
+@while ($i<50)
+{
+  #loops{
+padding: $i+px;}
+
+$i:$i+10;
+}
+
+
+// ///////////////////////////////SASS @if and @else/////////////////////////
+
+$j:10;
+
+@if($j>20)
+{
+  #loops{
+    background-color: aqua;
+  }
+}
+@else{
+  #loops{
+    background-color: red;
+  }
+}
+
+
+ ///////////////////////// // SASS @CONTENT DIRECTIVES///////////////////////////
+
+ @mixin set-content-value($content-value) {
+   border-radius: $content-value;
+   @content;
+ }
+
+ @mixin Set-content-another-way {
+   #introspection{
+    @content;
+   }
+ }
+ 
+ @mixin hover 
+ {
+  &:hover{
+    @content;
+  } 
+ }
+ @mixin media($width) {
+   @media screen and (max-width:$width){
+     @content;
+   }
+ }
+//  #contentid{
+//  @include set-content-value(5px){
+//    border-style: dashed;
+//  }
+//  }
+
+// @include Set-content-another-way{
+// #contentid{
+//   color: green;
+// }
+// }
+
+// #contentid{
+//   border: 1px solid black;
+
+//   @include hover{
+//     background-color: aqua;
+//   }
+// }
+
+@include media(1300px)
+{
+  body{
+    background-color: aqua;
+  }
+}
+@include media(1000px)
+{
+  body{
+    background-color:red;
+  }
+}
+@include media(700px)
+{
+  body{
+    background-color:yellow;
+  }
+}
+
+  // ////////////// SASS INTROSPECTION//////////////////
+
+  $num:10px;
+  $char:"Arial";
+  $list:10px 20px 30px;
+  $map:("regular":400 , "bold":500);
+
+  @function add($a, $bb){
+    @return $a+$b;
+}
+
+#introspection{
+  $num1:20px;
+// padding: variable-exists(num);
+// padding: global-variable-exists(num1);
+// padding: mixin-exists(sameinall);
+// padding: function-exists($name: add);
+// padding: type-of($value: $num);
+padding: inspect($value: $char);
+
+
+  // /////////////// SASS MAP////////////////
+
+  $font-weight:("regular":400 , "medium":600);
+  $light-weight:("bold":200 , "italic":500);
+  $map-merger:map-merge($map1: $font-weight, $map2:$light-weight );
+  $remove:map-remove($font-weight,"medium");
+
+  #mapping{
+    // font-weight: map-get($map: $font-weight, $key:"regular" );
+    // font-weight: map-keys($map: $font-weight);
+    // font-weight: map-values($map: $font-weight);
+    //  font-weight:map-values($map-merger );
+    // font-weight: map-values($map: $remove);
+    // font-weight: map-has-key($map: $font-weight, $key:"medium" );
+    font-weight: nth($list: $font-weight, $n:2 );
+  }
+
+
+  // //////////////////SASS SELECTOR ///////////////////
+
+  // $selector: selector-nest("ul","li");
+  // $selector : selector-nest(".abc , .def","p");
+  // $selector : selector-nest(".abc" , "&:hover");
+  // $selector : selector-append("a" , ".active");
+  // $selector : selector-nest(".abc" , "_copy , image");
+  // $selector : selector-replace("a.abc" , ".abc" , ".link");
+  $selector : simple-selectors("a.abc");
+  
+
+  #{$selector}{
+  width: 10px;
+  }
+
+
+    // ///////////////////////////SASS COLORS ///////////////////////
+$base_color:pink;
+
+  #third{
+    color:black;
+    width: 200px;
+    height: 70px;
+    border: 5px solid blue;
+    // background-color: darken($base_color,30);
+    // background-color: lighten($base_color,50);
+    // background-color: adjust_hue($base_color,10);
+    // background-color: saturate($base_color,30);
+    // background-color: desaturate($base_color,10);
+    background-color: mix($base_color,green,30);
+    // background-color: transparentize($base_color,0.3);
+    }
+
+   ///////////////////////////////// SASS LISTING //////////////////
+   $listing : 10px 20px 30px;
+   $listing1 : 10 20 30;
+   $listing2 : 10px , 20px , 30px;
+ 
+
+   #padding{
+    color:black;
+    width: 200px;
+    height: 70px;
+    border: 5px solid red;
+    padding: length($listing);
+    padding: nth($listing , 2);
+    padding: set-nth($listing , 2 , 50em);
+    padding: join($listing , $listing1);
+    padding: append($listing1 , 2 , space);
+    padding: zip((1px,2px,3px) , (red,green,blue));
+    padding: index($list: $listing, $value:30px );
+    padding: list-separator($listing);
+    padding: is-bracketed($listing);
+   }
+
+// ///////////////////NUMBER FUNCTION ////////////
+.mrgn{
+  margin: abs($number: 10px);
+  margin: ceil($number: 4.4);
+  margin: floor($number: 3.2);
+  margin: round($number: 6.4);
+  margin: max(10px , 20px);
+  margin: min(10px , 20px);
+  margin: percentage(0.2);
+  margin: percentage(100px / 50px);
+  margin: random();
+  margin: random(10);
+  margin: unit(100px);
+  margin: comparable(15px, 10px);
+
+  
+ // style.css file gives response   
+// .mrgn {
+//   margin: 10px;
+//   margin: 5;
+//   margin: 3;
+//   margin: 6;
+//   margin: 20px;
+//   margin: 10px;
+//   margin: 20%;
+//   margin: 200%;
+//   margin: 0.9968611435;
+//   margin: 2;
+//   margin: "px"; 
+//   margin: true; }
+
+
+  
+ ////////////////////// // SASS STRING FUNCTION////////////////////
+
+ .txt{
+   font-family: quote($string: "Arial");
+   font-family: unquote($string: "Arial");
+   font-family: to-upper-case($string: "Arial");
+   font-family: to-lower-case($string: "Arial");
+   font-family: str-length($string: "Arial");
+   font-family: str-index("Hello world!", "H");
+   font-family: str-insert("Hello world!", " wonderful", 6);
+   font-family: str-slice("Hello world!", 2, 5);
+   font-family: to-lower-case("Hello World!");
+   font-family: to-upper-case("Hello World!");
+   font-family: str-insert("Hello world!", " wonderful", 6);
+   font-family: unique-id();
+ }
+
+ 
+  // style.css file gives response   
+  // .txt {
+  // font-family: "Arial";
+  // font-family: Arial;
+  // font-family: "ARIAL";
+  // font-family: "arial";
+  // font-family: 5;
+  // font-family: 1;
+  // font-family: "Hello wonderful world!";
+  // font-family: "ello";
+  // font-family: "hello world!";
+  // font-family: "HELLO WORLD!";
+  // font-family: "Hello wonderful world!";
+  // font-family: uz3br7qhj; }
+
+
+
+ 
+}
+
+}

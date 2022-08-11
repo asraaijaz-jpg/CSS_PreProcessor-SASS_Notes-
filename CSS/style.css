@@ -1,0 +1,155 @@
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+nav li {
+  display: inline-block; }
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+/* Define sass variables and values for website */
+/* Use the variables */
+body {
+  font-style: italic;
+  stroke: beige;
+  background-color: yellow;
+  color: darkblue;
+  font-size: 18px; }
+
+.alldiv {
+  border: 10px solid blue;
+  border-radius: 20px;
+  width: 80px;
+  height: 50px; }
+
+#first, #second {
+  color: red;
+  text-transform: uppercase;
+  text-indent: 50px; }
+
+#second, #first {
+  color: green;
+  text-decoration-line: overline;
+  text-shadow: 2px 2px; }
+
+.opt {
+  padding: true;
+  padding: true;
+  padding: 30px; }
+  .opt .opt {
+    padding: true;
+    padding: true;
+    padding: 30px; }
+
+.opt {
+  margin-right: 20px; }
+  .opt .opt {
+    margin-right: 20px; }
+
+.divstyle {
+  width: 600px;
+  border: 5px solid red; }
+
+.divstyle {
+  width: 600px; }
+
+#loops-1 {
+  width: 100px;
+  background-color: #ffbbc7; }
+
+#loops-2 {
+  width: 100px;
+  background-color: #ffb6c3; }
+
+#loops-3 {
+  width: 100px;
+  background-color: #ffb1be; }
+
+normal {
+  font-weight: bold;
+  font-size: 10px; }
+
+italic {
+  font-weight: extend;
+  font-size: 5px; }
+
+#loops {
+  padding: 10px; }
+
+#loops {
+  padding: 20px; }
+
+#loops {
+  padding: 30px; }
+
+#loops {
+  padding: 40px; }
+
+#loops {
+  background-color: red; }
+
+@media screen and (max-width: 1300px) {
+  body {
+    background-color: aqua; } }
+@media screen and (max-width: 1000px) {
+  body {
+    background-color: red; } }
+@media screen and (max-width: 700px) {
+  body {
+    background-color: yellow; } }
+#introspection {
+  padding: "Arial"; }
+  #introspection #mapping {
+    font-weight: "medium" 600; }
+  #introspection a, #introspection .abc {
+    width: 10px; }
+  #introspection #third {
+    color: black;
+    width: 200px;
+    height: 70px;
+    border: 5px solid blue;
+    background-color: #4d933d; }
+  #introspection #padding {
+    color: black;
+    width: 200px;
+    height: 70px;
+    border: 5px solid red;
+    padding: 3;
+    padding: 20px;
+    padding: 10px 50em 30px;
+    padding: 10px 20px 30px 10 20 30;
+    padding: 10 20 30 2;
+    padding: 1px red, 2px green, 3px blue;
+    padding: 3;
+    padding: space;
+    padding: false; }
+  #introspection .mrgn {
+    margin: 10px;
+    margin: 5;
+    margin: 3;
+    margin: 6;
+    margin: 20px;
+    margin: 10px;
+    margin: 20%;
+    margin: 200%;
+    margin: 0.1694768084;
+    margin: 10;
+    margin: "px";
+    margin: true; }
+    #introspection .mrgn .txt {
+      font-family: "Arial";
+      font-family: Arial;
+      font-family: "ARIAL";
+      font-family: "arial";
+      font-family: 5;
+      font-family: 1;
+      font-family: "Hello wonderful world!";
+      font-family: "ello";
+      font-family: "hello world!";
+      font-family: "HELLO WORLD!";
+      font-family: "Hello wonderful world!";
+      font-family: uiy3ev7qx; }
+
+/*# sourceMappingURL=style.css.map */
